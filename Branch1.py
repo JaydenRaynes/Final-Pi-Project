@@ -107,45 +107,20 @@ octave4 = {}
 octave5 = {}
 octave6 = {}
 
-octaves = {                         # Dictionary of each octave dictionary
+# Dictionary of each octave dictionary
+octaves = {                        
     "octave3" : octave3,
     "octave4" : octave4,
     "octave5" : octave5,
     "octave6" : octave6
 }
 
+# The list of every value/button
 button_names = ["x", "circle", "square", "triangle", "share", "options", "left_stick_click", "right_stick_click", "L1", "R1"]        
 hat_names = ["up_arrow", "down_arrow", "left_arrow", "right_arrow"]
 hat_tuples = [(0, 1), (0, -1), (-1, 0), (1, 0)]
 music_button_names = ["x", "circle", "square", "triangle", "share", "options", "L1", "R1"]
- 
-
-
-
-
-#total_index = 0
-#for octave in octaves.keys():                                                           # Iterate through octaves dictionary
-#    i = 0                                                                               # button value on controller
-#    for button in music_button_names:                                                   # for a button in the list music_button_names
-#        octaves[octave].update(button = (i, list_of_notes[total_index]))                # octaves - big dictionary - octave3 is updating button = 0 which is x button, very first item in freq_list
-#        octaves[octave][button] = octaves[octave].pop('button')                         # in the sub dictionary, makes the key = button,frequency of button and value = note name
-#        i += 1
-#        total_index += 1
-#    for index in range(len(hat_names)):
-#        octaves[octave].update(hat = (hat_tuples[index], list_of_notes[total_index]))
-#        octaves[octave][hat_names[index]] = octaves[octave].pop('hat')
-#        i += 1
-#        total_index += 1
-
-
-# Plays all notes tied to buttons (except the d pad) all in order (Used for testing)
-'''
-for octave in octaves:
-    for buttonName in music_button_names:
-        index, note = octaves[str(octave)][buttonName]
-        note.play(100)
-        pygame.time.wait(400)
-'''
+create = create_octaves(octaves, button_names, hat_names, hat_tuples, music_button_names)
 
 #detects and initiates controller(s)
 joysticks = []                                              # list of joysticks/controllers
@@ -154,9 +129,7 @@ for i in range(pygame.joystick.get_count()):                # pygame automactica
 for joystick in joysticks:                                  # For the amount of controllers in the joystick list
     joystick.init()                                         # Basically initiate the functions of the controller
 
-
-
-
+# The Program
 currentOctave = 'octave3'
 running = True
 while running:
@@ -201,4 +174,13 @@ while running:
 
     window_surface.blit(background, (0, 0))
     pygame.display.update()
+'''
+
+# Plays all notes tied to buttons (except the d pad) all in order (Used for testing)
+'''
+for octave in octaves:
+    for buttonName in music_button_names:
+        index, note = octaves[str(octave)][buttonName]
+        note.play(100)
+        pygame.time.wait(400)
 '''
