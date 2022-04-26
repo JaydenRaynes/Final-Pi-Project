@@ -28,10 +28,10 @@ DEFAULT_VOLUME = 1.0
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
-CHANNELS = 2
+CHANNELS = 1
 RECORD_SECONDS = 7
 
-DEV_INDEX = 2
+DEV_INDEX = 5
 
 #note class. Creates notes
 class Note(pygame.mixer.Sound):
@@ -65,12 +65,6 @@ class Note(pygame.mixer.Sound):
 class GUI(pyg.UIManager):
     pass
     
-class Violin:
-    G3 = Note(196, 1)
-    D4 = Note(293.7, 1)
-    A4 = Note(440, 1)
-    E5 = Note(659.3, 1)
-
 #creates dictionary of dictionaries of Notes.
 def create_octaves(octaves, button_names, hat_names, hat_tuples, music_button_names):
     #total_index determines what note is tied to each button on the control in the octave
@@ -133,10 +127,10 @@ octave_5_output = 12
 octave_6_output = 26
 
 # setup the output for octaves
-GPIO.setup(octave_3_output, GPIO.OUT)
-GPIO.setup(octave_4_output, GPIO.OUT)
-GPIO.setup(octave_5_output, GPIO.OUT)
-GPIO.setup(octave_6_output, GPIO.OUT)
+#GPIO.setup(octave_3_output, GPIO.OUT)
+#GPIO.setup(octave_4_output, GPIO.OUT)
+#GPIO.setup(octave_5_output, GPIO.OUT)
+#GPIO.setup(octave_6_output, GPIO.OUT)
 
 #creation of list w/ every note
             #C      Db      D       Eb      E       F       Gb      G       Ab      A       Bb      B
@@ -200,7 +194,7 @@ print(sd.query_devices())
 '''
 #clears the directory of all previous audio output files
 print("Clearing Cache...")
-path = "/Program Files (x86)/Notepad++/"
+path = "/home/pi/Music"
 file_list = os.listdir(path)
 for file in file_list:
     fileNameList = file.split("_")
@@ -274,26 +268,26 @@ while running:
                                 currentOctave = addOctave(currentOctave)
                                 pygame.time.wait(100)
                                 print(currentOctave)
-                if (currentOctave == "octave_3"):
-                    GPIO.output(octave_3_output, True)
-                    GPIO.output(octave_4_output, False)
-                    GPIO.output(octave_5_output, False)
-                    GPIO.output(octave_6_output, False)
-                if (currentOctave == "octave_4"):
-                    GPIO.output(octave_4_output, True)
-                    GPIO.output(octave_5_output, False)
-                    GPIO.output(octave_6_output, False)
-                    GPIO.output(octave_3_output, False)                    
-                if (currentOctave == "octave_5"):
-                    GPIO.output(octave_5_output, True)
-                    GPIO.output(octave_6_output, False)
-                    GPIO.output(octave_3_output, False)
-                    GPIO.output(octave_4_output, False)
-                if (currentOctave == "octave_6"):
-                    GPIO.output(octave_6_output, True)
-                    GPIO.output(octave_3_output, False)
-                    GPIO.output(octave_4_output, False)
-                    GPIO.output(octave_5_output, False)
+                #if (currentOctave == "octave_3"):
+                 #   GPIO.output(octave_3_output, True)
+                 #   GPIO.output(octave_4_output, False)
+                 #   GPIO.output(octave_5_output, False)
+                 #   GPIO.output(octave_6_output, False)
+                #if (currentOctave == "octave_4"):
+                 #   GPIO.output(octave_4_output, True)
+                 #   GPIO.output(octave_5_output, False)
+                 #   GPIO.output(octave_6_output, False)
+                 #   GPIO.output(octave_3_output, False)                    
+                #if (currentOctave == "octave_5"):
+                 #   GPIO.output(octave_5_output, True)
+                 #   GPIO.output(octave_6_output, False)
+                 #   GPIO.output(octave_3_output, False)
+                 #   GPIO.output(octave_4_output, False)
+                #if (currentOctave == "octave_6"):
+                 #   GPIO.output(octave_6_output, True)
+                 #   GPIO.output(octave_3_output, False)
+                 #   GPIO.output(octave_4_output, False)
+                 #   GPIO.output(octave_5_output, False)
                 print("* done recording")
                 stream.stop_stream()
                 break
